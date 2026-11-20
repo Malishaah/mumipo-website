@@ -51,7 +51,7 @@
     });
   })();
 </script>
-<link rel="stylesheet" href="design.css?v=chick-1">
+<link rel="stylesheet" href="design.css?v=chick-mushroom-2">
 <link rel="stylesheet" href="account.css?v=family-wallet">
 </head>
 <body>
@@ -158,7 +158,7 @@
   <div class="game-intro">
     <h2>Hop &amp; munch!</h2>
     <p>Fill Little Chick’s picnic basket with 15 fruits.</p>
-    <p class="game-instructions">Tap the garden or press Space to jump. Hop twice to go higher! Land on rocks to break them or on raindrops to bounce.</p>
+    <p class="game-instructions">Tap the garden or press Space to jump. Hop twice to go higher! Land on rocks to break them or on mushrooms to bounce.</p>
     <button type="button" class="pill game-play" id="game-start" hidden><span class="game-play-icon" aria-hidden="true"></span>Play</button>
   </div>
   <div class="game-stage">
@@ -176,12 +176,15 @@
         </div>
       </div>
       <span class="game-item game-fruit" aria-hidden="true">🍓</span>
-      <span class="game-item game-drop" aria-hidden="true">
-        <svg viewBox="0 0 68 40" focusable="false">
-          <path fill="#78cde8" stroke="#174968" stroke-width="2.5" d="M3 28C3 18 16 8 32 7c16-1 31 8 33 18 2 8-11 13-29 13C16 38 2 34 3 28Z"/>
-          <path fill="#3b9fc9" d="M5 29c5 3 16 5 29 5 13 0 24-2 29-6-2 5-12 8-27 8-17 0-28-2-31-7Z"/>
-          <path fill="none" stroke="#d3f6ff" stroke-linecap="round" stroke-width="2.5" d="M11 22c2-3 6-6 10-7"/>
-          <g fill="#19405e"><rect x="24" y="15" width="4" height="11" rx="2"/><rect x="32" y="15" width="4" height="11" rx="2"/></g>
+      <span class="game-item game-mushroom" aria-hidden="true">
+        <svg viewBox="0 0 68 52" focusable="false">
+          <path d="M26 29h16l4 16c1 6-25 6-24 0Z" fill="#fff0ce" stroke="#654736" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M5 30C8 13 18 4 34 4s26 9 29 26c1 7-59 7-58 0Z" fill="#cb704d" stroke="#654034" stroke-width="2.5"/>
+          <path d="M9 30c12 4 37 4 50 0" fill="none" stroke="#f1ba8b" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="21" cy="20" rx="6" ry="4" fill="#fff1d9" transform="rotate(-22 21 20)"/>
+          <ellipse cx="40" cy="13" rx="5" ry="3.5" fill="#fff1d9" transform="rotate(12 40 13)"/>
+          <ellipse cx="50" cy="24" rx="4" ry="3" fill="#fff1d9"/>
+          <path d="M30 39v3m9-3v3" stroke="#5f4339" stroke-width="2.6" stroke-linecap="round"/>
         </svg>
       </span>
       <span class="game-item game-rock" aria-hidden="true" hidden><span class="game-pebble"></span><span class="game-pebble"></span></span>
@@ -292,9 +295,9 @@
     <p class="account-message" id="account-message" role="status"></p>
   </div>
 </dialog>
-<script src="game-audio.js?v=chick-1" defer></script>
+<script src="game-audio.js?v=chick-mushroom-2" defer></script>
 <script src="account.js?v=chick-1" defer></script>
-<script src="game.js?v=chick-1" defer></script>
+<script src="game.js?v=chick-mushroom-2" defer></script>
 <script src="lullabies.js" defer></script>
 <script src="storybook.js?v=chick-1" defer></script>
 </body>

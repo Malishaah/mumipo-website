@@ -166,9 +166,9 @@ p { max-width: 38ch; margin-block: .9rem 1.25rem }
 .coming { font-weight: 900; color: #713044 }
 .shop-launch-note { margin: 1rem auto 0; text-align: center; font-size: .95rem }
 .plush .coming { margin-bottom: 0 }
-.coloring .shop-card-art { background: var(--lavender) }
-.coloring img { filter: drop-shadow(0 4px 8px #39234a36) }
-.coloring-format { margin: .55rem 0 0; color: var(--link); font-size: .9rem }
+
+
+
 @media (min-width: 821px) {
   section { padding-block: clamp(3.5rem, 6vw, 5.5rem) }
   .intro { padding-block: clamp(3.25rem, 5vw, 4.5rem) }
@@ -190,7 +190,7 @@ footer { padding-block: 1.7rem }
 .social-icon:hover { background: var(--nav-hover) }
 @media (prefers-reduced-motion: no-preference) {
   .pill { transition: background-color 150ms ease }
-  :is(.hero, .watch, .socials, .coloring) .pill { transition: none }
+
   .hero-art img { transition: transform 220ms ease }
   @media (hover: hover) { .hero-art:hover img { transform: rotate(-3deg) } }
 }
@@ -363,39 +363,39 @@ button.pill { border: 0; font: inherit; font-weight: 900; cursor: pointer }
   left: 66%; bottom: 111px; font-size: clamp(1.95rem, 4vw, 2.2rem);
   filter: drop-shadow(0 0 1px #513422) drop-shadow(0 0 2px #fff3d7) drop-shadow(0 2px 1px #28392866);
 }
-.game-drop { left: 77%; bottom: 23px; width: clamp(48px, 5vw, 52px) }
-.game-drop svg {
-  display: block; width: 100%; transform-origin: 74% 95%;
+.game-mushroom { left: 77%; bottom: 23px; width: clamp(48px, 5vw, 52px) }
+.game-mushroom svg {
+  display: block; width: 100%; transform-origin: 50% 100%;
   filter: drop-shadow(0 2px 1px #28392866);
 }
-.game-splash {
+.game-burst {
   left: calc(var(--impact-x) - var(--camera-x, 0px));
   position: absolute; width: 0; height: 0; z-index: 1; pointer-events: none;
-  animation: game-splash-fade .38s ease-out both;
+  animation: game-burst-fade .38s ease-out both;
 }
-.game-splash span {
+.game-burst span {
   position: absolute; width: 6px; height: 8px; border-radius: 60% 45% 55% 55%;
-  background: #78cde8; border: 1px solid #257196;
+  background: #d99168; border: 1px solid #805239;
 }
-.game-splash.is-rock span {
+.game-burst.is-rock span {
   border-radius: 32% 56% 26% 45%; background: #a89aa0; border-color: #5a5362;
 }
-.game-splash.is-rock span:nth-child(even) { width: 9px; height: 6px; background: #c9bfc3 }
-.game-splash span:nth-child(1) { --splash-x: -19px; --splash-y: -9px }
-.game-splash span:nth-child(2) { --splash-x: -11px; --splash-y: -23px }
-.game-splash span:nth-child(3) { --splash-x: 3px; --splash-y: -27px }
-.game-splash span:nth-child(4) { --splash-x: 14px; --splash-y: -19px }
-.game-splash span:nth-child(5) { --splash-x: 23px; --splash-y: -6px }
-@keyframes game-splash-fade { 0%, 40% { opacity: 1 } 100% { opacity: 0 } }
+.game-burst.is-rock span:nth-child(even) { width: 9px; height: 6px; background: #c9bfc3 }
+.game-burst span:nth-child(1) { --burst-x: -19px; --burst-y: -9px }
+.game-burst span:nth-child(2) { --burst-x: -11px; --burst-y: -23px }
+.game-burst span:nth-child(3) { --burst-x: 3px; --burst-y: -27px }
+.game-burst span:nth-child(4) { --burst-x: 14px; --burst-y: -19px }
+.game-burst span:nth-child(5) { --burst-x: 23px; --burst-y: -6px }
+@keyframes game-burst-fade { 0%, 40% { opacity: 1 } 100% { opacity: 0 } }
 @media (prefers-reduced-motion: no-preference) {
-  .game-splash span { animation: game-splash-particle .38s ease-out both }
-  @keyframes game-splash-particle {
+  .game-burst span { animation: game-burst-particle .38s ease-out both }
+  @keyframes game-burst-particle {
     from { transform: scale(.7) }
-    to { transform: translate(var(--splash-x), var(--splash-y)) scale(.45) }
+    to { transform: translate(var(--burst-x), var(--burst-y)) scale(.45) }
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .game-splash span { transform: translate(var(--splash-x), var(--splash-y)) }
+  .game-burst span { transform: translate(var(--burst-x), var(--burst-y)) }
 }
 .game-rock { bottom: 23px; display: flex; align-items: flex-end }
 .game-pebble {
@@ -472,10 +472,10 @@ button.pill { border: 0; font: inherit; font-weight: 900; cursor: pointer }
   .game-field.is-running .game-character.is-airborne .game-character-art { animation: none; transform: rotate(-9deg) }
   .game-field.is-running .game-character.is-airborne .game-paw { animation: none; transform: translateY(-12%) rotate(-9deg) }
   .game-field.is-running .game-character.is-airborne .game-paw--far { transform: translateY(-5%) rotate(7deg) }
-  .game-field.is-running .game-drop svg { animation: raindrop-scoot 1.04s ease-in-out infinite }
+  .game-field.is-running .game-mushroom svg { animation: mushroom-waddle .82s ease-in-out infinite }
   .game-field.is-paused .game-character-art,
   .game-field.is-paused .game-paw,
-  .game-field.is-paused .game-drop svg { animation-play-state: paused }
+  .game-field.is-paused .game-mushroom svg { animation-play-state: paused }
   @keyframes chick-run {
     0%, 100% { transform: translateY(0) rotate(2deg) }
     50% { transform: translateY(-2px) rotate(-2deg) }
@@ -485,11 +485,11 @@ button.pill { border: 0; font: inherit; font-weight: 900; cursor: pointer }
     45% { transform: translate(-28%, 0) rotate(11deg) }
     72% { transform: translate(-7%, -22%) rotate(2deg) }
   }
-  @keyframes raindrop-scoot {
+  @keyframes mushroom-waddle {
     0%, 100% { transform: scale(1, 1) }
-    33% { transform: translateX(-3px) scale(1.38, .74) }
-    47% { transform: translateX(-3px) scale(1.34, .77) }
-    82% { transform: scale(.94, 1.04) }
+    33% { transform: translateY(-4px) rotate(5deg) }
+    47% { transform: translateY(-3px) rotate(2deg) }
+    82% { transform: rotate(-4deg) }
   }
 }
 
@@ -558,7 +558,7 @@ button.game-jump:disabled { opacity: .58; cursor: default }
 .footer-details small { font-size: inherit }
 .footer-contact { display: inline-flex; align-items: center; min-height: 44px; color: var(--link); text-underline-offset: .2em }
 
-[data-theme="dark"] .brand img, [data-theme="dark"] .footer-details img { filter: invert(1) }
+[data-theme="dark"] .brand img, [data-theme="dark"] .footer-details img { filter: none }
 [data-theme="dark"] .hero-blob path { fill: #855366 }
 [data-theme="dark"] .hero-art img { border-color: #886775 }
 [data-theme="dark"] .hero-art span { color: #f1becc }
@@ -574,10 +574,10 @@ button.game-jump:disabled { opacity: .58; cursor: default }
 [data-theme="dark"] .game { --leaf: #293e39; background: var(--leaf) }
 [data-theme="dark"] .sleep .section-wave { fill: #293e39 }
 [data-theme="dark"] .coming { color: #f4b9cf }
-[data-theme="dark"] .coloring { --lavender: #382945 }
-[data-theme="dark"] .coloring .pill { background: #edccf6; color: #302039 }
-[data-theme="dark"] .coloring .pill:hover { background: #f5defb }
-[data-theme="dark"] .coloring .pill:active { background: #dbb2eb }
+
+
+
+
 [data-theme="dark"] .game-field { --paper: #fff9ed; --focus: #483057; color-scheme: light; color: #302039 }
 [data-theme="dark"] .game-field {
   --garden-veil: linear-gradient(180deg, #567e6840, #537b5933 48%, #496a431a 78%, transparent);
@@ -596,3 +596,5 @@ button.game-jump:disabled { opacity: .58; cursor: default }
 .game-jump-portrait img, .account-banner img { object-fit: contain }
 .game-jump-portrait img { width: 100%; height: 100% }
 @media (prefers-reduced-motion: reduce) { .game-character-art { rotate: 0deg; transition: none } }
+
+.game-burst:not(.is-rock) span:nth-child(even) { background: #fff0ce; border-radius: 50% }

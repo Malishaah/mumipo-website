@@ -2,6 +2,12 @@
 
 En responsiv webbplats med en liten gul kyckling. Barn och vuxna kan läsa en bildsaga, lyssna på vaggvisor och spela ett fruktspel. Webbplatsen har ljust och mörkt tema samt ett enkelt vuxenkonto.
 
+## Öppna webbplatsen
+
+[Öppna granskningsversionen](https://mumipo-website.malirnsh.workers.dev/)
+
+Använd länken ovan vid bedömningen. Den vanliga domänen är tillfälligt avstängd.
+
 ## Starta lokalt
 
 Du behöver Git, Python 3 och en webbläsare. Ingen byggprocess krävs.
@@ -18,7 +24,7 @@ Du kan även hämta koden som ZIP från GitHub, packa upp den och köra samma se
 ## Använd och testa
 
 1. Välj **Stories**, öppna boken och prova **Next**, **Back** och **Read again**.
-2. Välj **Play**. Hoppa med mellanslag eller tryck på spelplanen. Hoppa en gång till i luften för ett dubbelhopp. Målet är 15 frukter.
+2. Välj **Play**. Hoppa med mellanslag eller tryck på spelplanen. Hoppa en gång till i luften för ett dubbelhopp. Målet är 15 frukter. Landa på en svamp för att studsa; en kollision från sidan kostar ett hjärta.
 3. Prova paus, ljudknapp och återgång från spelet.
 4. Spela och pausa en vaggvisa. Växla mellan ljust och mörkt tema.
 5. Prova samma flöden i en smal mobilvy och en bred datorvy.

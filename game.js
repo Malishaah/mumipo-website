@@ -19,7 +19,7 @@
   const characterArt = character.querySelector('.game-character-art');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const fruit = section.querySelector('.game-fruit');
-  const drop = section.querySelector('.game-drop');
+  const mushroom = section.querySelector('.game-mushroom');
   const rock = section.querySelector('.game-rock');
   const result = section.querySelector('#game-result');
   const resultHeading = section.querySelector('#game-result-heading');
@@ -43,7 +43,7 @@
   let jumpsUsed = 0;
   let untilItem = 0;
   let nextFruit = true;
-  let nextObstacle = drop;
+  let nextObstacle = mushroom;
   let previousTime = 0;
   let frame = 0;
   let runnerX = 0;
@@ -115,12 +115,12 @@
         const [doubleRock] = rockBag.splice(Math.floor(Math.random() * rockBag.length), 1);
         node.classList.toggle('is-double', doubleRock);
       }
-      nextObstacle = nextObstacle === drop ? rock : drop;
+      nextObstacle = nextObstacle === mushroom ? rock : mushroom;
     }
     node.hidden = false;
     node.style.left = '0';
     field.append(node);
-    const drift = node.classList.contains('game-drop') ? speed * .20 : 0;
+    const drift = node.classList.contains('game-mushroom') ? speed * .20 : 0;
     const lead = fieldWidth * .86;
     items.push({
       node, worldX: runnerX + lead * (1 + drift / speed), drift, fruitName,
@@ -149,14 +149,14 @@
   }
 
   function scatterObstacle(item, isRock = false) {
-    const splash = document.createElement('span');
-    splash.className = 'game-splash';
-    splash.classList.toggle('is-rock', isRock);
-    splash.style.setProperty('--impact-x', item.worldX + item.width / 2 + 'px');
-    splash.style.bottom = item.bottom + item.height * .32 + 'px';
-    for (let i = 0; i < 5; i++) splash.append(document.createElement('span'));
-    splash.addEventListener('animationend', () => splash.remove(), { once: true });
-    field.append(splash);
+    const burst = document.createElement('span');
+    burst.className = 'game-burst';
+    burst.classList.toggle('is-rock', isRock);
+    burst.style.setProperty('--impact-x', item.worldX + item.width / 2 + 'px');
+    burst.style.bottom = item.bottom + item.height * .32 + 'px';
+    for (let i = 0; i < 5; i++) burst.append(document.createElement('span'));
+    burst.addEventListener('animationend', () => burst.remove(), { once: true });
+    field.append(burst);
   }
 
   function showGardenEffect(kind, worldX, bottom) {
@@ -216,7 +216,7 @@
       item.worldX -= item.drift * seconds;
       item.x = item.worldX - cameraX;
       item.node.style.transform = 'translateX(' + item.x + 'px)';
-      const isDrop = item.node.classList.contains('game-drop');
+      const isMushroom = item.node.classList.contains('game-mushroom');
       const stomped = !item.fruitName && landsOnObstacle(item, player, player.bottom + previousHeight - height, step + item.drift * seconds);
       const hit = stomped || overlaps(item, player);
       if (hit || item.x < -item.width) {
@@ -225,16 +225,16 @@
       }
       if (!hit) continue;
 
-      if (isDrop || stomped) scatterObstacle(item, !isDrop);
+      if (isMushroom || stomped) scatterObstacle(item, !isMushroom);
       if (stomped) {
-        if (isDrop) {
+        if (isMushroom) {
           height = Math.max(height, item.bottom + item.height * .72 - (player.bottom - height));
           velocity = 260;
           jumpsUsed = 0;
           showCharacter();
         }
-        audio?.play(isDrop ? 'bounce' : 'crumble');
-        status.textContent = isDrop ? 'Boing! You bounced off a raindrop.' : 'Crack! The rock crumbled.';
+        audio?.play(isMushroom ? 'bounce' : 'crumble');
+        status.textContent = isMushroom ? 'Boing! You bounced off a mushroom.' : 'Crack! The rock crumbled.';
         continue;
       }
       if (item.fruitName) {
@@ -248,8 +248,8 @@
         }
       } else {
         lives--;
-        audio?.play(isDrop ? 'splash' : 'bump');
-        const reaction = isDrop ? 'Splash!' : 'Bump!';
+        audio?.play('bump');
+        const reaction = isMushroom ? 'Oops!' : 'Bump!';
         status.textContent = reaction + (lives === 1 ? ' One heart left.' : ' ' + lives + ' hearts left.');
       }
       showScore();
@@ -269,7 +269,7 @@
 
   function resetBoard() {
     for (const item of items) item.node.remove();
-    for (const effect of field.querySelectorAll('.game-splash, .game-effect')) effect.remove();
+    for (const effect of field.querySelectorAll('.game-burst, .game-effect')) effect.remove();
     items.length = 0;
     result.hidden = true;
     starReward.hidden = true;
@@ -280,11 +280,10 @@
     points = height = velocity = jumpsUsed = previousTime = 0;
     runnerX = cameraX = 0;
     showStillFeathers();
-    showStillFeathers();
     character.style.removeProperty('left');
     field.style.removeProperty('--camera-x');
     nextFruit = true;
-    nextObstacle = drop;
+    nextObstacle = mushroom;
     untilItem = 0.2;
     showScore();
     showCharacter();
@@ -302,7 +301,7 @@
     section.classList.add('is-playing');
     resetBoard();
     runnerX = field.clientWidth * .10;
-    fruit.hidden = drop.hidden = true;
+    fruit.hidden = mushroom.hidden = true;
     running = true;
     document.dispatchEvent(new Event('chick:picnic-start'));
     paused = false;
@@ -321,7 +320,7 @@
     running = paused = false;
     field.classList.remove('is-running', 'is-paused');
     resetBoard();
-    fruit.hidden = drop.hidden = false;
+    fruit.hidden = mushroom.hidden = false;
     controls.hidden = back.hidden = true;
     intro.hidden = false;
     section.classList.remove('is-playing');

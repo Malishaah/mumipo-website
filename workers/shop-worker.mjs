@@ -1,6 +1,5 @@
 const testProducts = {
-  plink_1Ubfs5FsZftPYE5lwf9k9MVa: { key: 'plush', title: 'Mumipo Plush', amount: 19900 },
-  plink_1UbpVOFsZftPYE5lnSySFX56: { key: 'coloring', title: 'Mumipo’s Coloring Book', amount: 9900 },
+  plink_1Ubfs5FsZftPYE5lwf9k9MVa: { key: 'plush', title: 'Little Chick Plush', amount: 19900 },
 };
 const acceptedEvents = new Set(['checkout.session.completed', 'checkout.session.async_payment_succeeded']);
 const sessionPattern = /^cs_test_[A-Za-z0-9]{10,160}$/;
@@ -80,6 +79,7 @@ async function confirmOrder(request, env) {
     .bind(form.sessionId).first();
   if (!order) return json({ state: 'pending' }, 202);
   const product = Object.values(testProducts).find(item => item.key === order.product);
+  if (!product) return json({ message: 'This earlier test product is no longer available.' }, 410);
   return json({ state: 'confirmed', title: product.title, amount: order.amount, currency: 'sek' });
 }
 
