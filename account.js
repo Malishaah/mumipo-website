@@ -10,6 +10,7 @@
   const nameForm = byId('account-name-form');
   const nameInput = byId('account-name');
   const editName = byId('account-edit-name');
+  const retryAccount = byId('account-retry');
   const isDemo = new URLSearchParams(location.search).get('account') === 'preview';
   const storageKey = 'chick-family-preview';
   let account = null;
@@ -20,11 +21,16 @@
   let pendingSave = Promise.resolve();
 
   async function api(path, data) {
-    const response = await fetch('/api/account' + path, data === undefined ? undefined : {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data),
-    });
-    const value = await response.json();
-    if (!response.ok) throw new Error(value.message || 'Please try again.');
+    let response;
+    try {
+      response = await fetch('/api/account' + path, data === undefined ? undefined : {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data),
+      });
+    } catch { throw new Error('Could not connect to the sign-in service. Please try again in a moment.'); }
+    let value;
+    try { value = await response.json(); }
+    catch { throw new Error('Could not reach the sign-in service. Please try again in a moment.'); }
+    if (!response.ok) throw new Error(value.message || 'Please try again in a moment.');
     return value;
   }
 
@@ -70,10 +76,11 @@
       const button = form.querySelector('[type="submit"]');
       if (button.disabled) return;
       button.disabled = true;
+      form.setAttribute('aria-busy', 'true');
       message.textContent = '';
       try { await submit(); }
       catch (error) { message.textContent = error.message; }
-      finally { button.disabled = false; }
+      finally { button.disabled = false; form.removeAttribute('aria-busy'); }
     });
   }
 
@@ -132,14 +139,35 @@
       byId('account-sign-out').focus();
     });
   } else {
-    api('').then(profile => {
-      account = profile.account;
-      if (!account && !profile.emailReady) {
-        emailForm.hidden = true;
-        byId('account-intro').textContent = 'Email sign-in is still being set up. You can play as a guest.';
+    async function loadAccount() {
+      const restoreFocus = document.activeElement === retryAccount;
+      emailForm.hidden = true;
+      retryAccount.hidden = true;
+      retryAccount.disabled = true;
+      byId('account-intro').textContent = 'Loading your account…';
+      try {
+        const profile = await api('');
+        account = profile.account;
+        emailForm.hidden = !account && !profile.emailReady;
+        byId('account-intro').textContent = profile.emailReady
+          ? 'Sign up or sign in with your email. Anyone can play as a guest.'
+          : 'Email sign-in is still being set up. You can play as a guest.';
+      } catch {
+        byId('account-intro').textContent = 'We couldn’t load your account. You can try again or keep playing as a guest.';
+        retryAccount.hidden = false;
+      } finally {
+        retryAccount.disabled = false;
+        render();
+        if (restoreFocus) {
+          if (account) editName.focus();
+          else if (!emailForm.hidden) byId('account-email').focus();
+          else if (!retryAccount.hidden) retryAccount.focus();
+        }
       }
-      render();
-    }).catch(() => {});
+    }
+    render();
+    loadAccount();
+    retryAccount.addEventListener('click', loadAccount);
     bindForm(emailForm, async () => {
       pendingEmail = byId('account-email').value.trim();
       await api('/send', { email: pendingEmail });
