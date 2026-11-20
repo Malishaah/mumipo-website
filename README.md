@@ -4,9 +4,9 @@ En responsiv webbplats med en liten gul kyckling. Barn och vuxna kan läsa en bi
 
 ## Öppna webbplatsen
 
-[Öppna granskningsversionen](https://mumipo-website.malirnsh.workers.dev/)
+[Öppna webbplatsen](https://mumipo.com/)
 
-Använd länken ovan vid bedömningen. Den vanliga domänen är tillfälligt avstängd.
+Webbplatsen visar granskningsversionen med kycklingen. [Alternativ länk](https://mumipo-website.malirnsh.workers.dev/).
 
 ## Starta lokalt
 
