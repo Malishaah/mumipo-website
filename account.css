@@ -1,0 +1,84 @@
+.header-actions { display: flex; align-items: center; gap: .25rem; flex: none }
+.account-trigger, .account-close, .account-text {
+  font: inherit; font-weight: 900; cursor: pointer; color: var(--link);
+}
+.account-trigger, .account-close {
+  display: inline-flex; align-items: center; justify-content: center; gap: .35rem;
+  min-height: 44px; padding: .25rem .65rem; border-radius: 99px;
+  border: 1px solid var(--control-border); background: var(--nav-hover); font-size: .95rem;
+}
+.account-trigger[hidden], #account-dialog [hidden], .game-star-reward[hidden] { display: none }
+.account-star {
+  display: inline-grid; place-items: center; flex: none; width: 1.65em; height: 1.65em;
+  border-radius: 50%; background: #ffe6a3; color: #653705; line-height: 1;
+}
+.account-dialog {
+  width: min(26rem, calc(100% - 1.5rem)); max-height: calc(100% - 1.5rem);
+  padding: 0; border: 1px solid var(--control-border); border-radius: 1.6rem;
+  background: var(--paper); color: var(--ink); box-shadow: 0 18px 70px #21152d69;
+}
+.account-dialog::backdrop { background: #21152d90 }
+.account-banner {
+  position: relative; min-height: 85px; display: grid; place-items: center;
+  background: radial-gradient(ellipse at 50% 100%, #ffe4af, #ffcbab 70%, #efb8be);
+}
+.account-banner img { object-fit: contain }
+.account-banner > span { position: absolute; top: 16%; left: calc(50% + 45px); color: #794a41 }
+.account-close {
+  position: absolute; top: .4rem; right: .45rem; width: 44px; padding: 0;
+  background: #fff9ed; color: #483057; font-size: 1.45rem;
+}
+.account-body { padding: 1.15rem clamp(1rem, 5vw, 1.55rem); font-size: 1rem }
+.account-body h2 { font-size: clamp(1.65rem, 6vw, 2.2rem) }
+.account-body p { margin: .45rem 0 .8rem }
+.account-preview { color: var(--link); font-size: .85rem }
+.account-body form { display: grid; gap: .55rem }
+.account-body label { font-weight: 900 }
+.account-body input {
+  width: 100%; min-height: 46px; font: inherit; padding: .55rem .75rem;
+  border: 1px solid var(--control-border); border-radius: .65rem;
+  color: var(--ink); background: var(--paper);
+}
+.account-body input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px }
+.account-profile {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0 .75rem;
+  margin-top: .6rem;
+}
+.account-email-label { display: block; font-size: .85rem }
+#account-profile-email { overflow-wrap: anywhere; display: block }
+.account-form-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .25rem 1rem }
+#account-name-form { margin: .25rem 0 .8rem }
+.account-wallet {
+  display: flex; align-items: center; gap: .65rem; padding: .75rem;
+  margin: .8rem 0; background: #fff0ca; color: #483057; border-radius: .85rem;
+}
+.account-wallet strong, .account-wallet small { display: block }
+.account-wallet strong { font-size: 1.2rem }
+.account-wallet .account-star { font-size: 1.4rem }
+.account-shop-note { border-top: 1px solid var(--border); padding-top: .65rem }
+.account-text {
+  min-height: 44px; padding: .25rem 0; border: 0; background: none;
+  text-align: start; text-decoration: underline; text-underline-offset: .18em;
+}
+a.account-text { display: inline-flex; align-items: center }
+.account-trigger:focus-visible, .account-close:focus-visible, .account-text:focus-visible {
+  outline: 3px solid var(--focus); outline-offset: 2px;
+}
+.account-message:empty { display: none }
+.game-result .game-star-reward:not([hidden]) {
+  display: table; padding: .2rem .58rem; border-radius: 99px; margin: .3rem auto;
+  background: #ffe7ac; color: #653705; font-weight: 900;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .account-dialog[open] { animation: account-arrive .24s ease-out }
+  .game-star-reward:not([hidden]) { animation: account-arrive .33s ease-out }
+  @keyframes account-arrive { from { opacity: 0; translate: 0 6px } to { opacity: 1; translate: 0 0 } }
+}
+@media (max-width: 640px) {
+  .header-actions { justify-self: end }
+  .account-trigger { padding-inline: .5rem }
+}
+@media (max-width: 355px) {
+  header .brand { gap: .25rem }
+  .brand-wordmark { width: 98px }
+}
