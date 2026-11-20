@@ -1,5 +1,5 @@
 const testProducts = {
-  plink_1Ubfs5FsZftPYE5lwf9k9MVa: { key: 'plush', title: 'Little Chick Plush', amount: 19900 },
+  plink_1Ubfs5FsZftPYE5lwf9k9MVa: { key: 'plush', title: 'Mumipo Plush', amount: 19900 },
 };
 const acceptedEvents = new Set(['checkout.session.completed', 'checkout.session.async_payment_succeeded']);
 const sessionPattern = /^cs_test_[A-Za-z0-9]{10,160}$/;

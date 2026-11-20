@@ -1,4 +1,4 @@
-# Little Chick
+# Mumipo
 
 En responsiv webbplats med en liten gul kyckling. Barn och vuxna kan läsa en bildsaga, lyssna på vaggvisor och spela ett fruktspel. Webbplatsen har ljust och mörkt tema samt ett enkelt vuxenkonto.
 
